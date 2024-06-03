@@ -20,10 +20,19 @@ spring:
 # 5월 29일 수업 때 주석처리 
 
 #gangsa ncloud mysql db
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://db-n8650-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul
+#    username: study
+#    password: bitcamp!@#123
+
+#team ncloud
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db-n8650-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://db-n9ji5-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul
+    #url 주소 수정
     username: study
-    password: bitcamp!@#123
+    #username 수정
+    password: bitcamp!@#123W
+    #password
     
 #mybatis setting
 mybatis:
