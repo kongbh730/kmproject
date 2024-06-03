@@ -14,8 +14,8 @@ import data.dto.MovieDto;
 public interface MovieMapperInter {
 	//insert : 영화 정보 추가
 	@Insert("""
-			insert into movie (title, director, actor, publishyear, totalreat, genre, youtubeURL)
-			values (title, director, actor, publishyear, totalreat, genre, youtubeURL)
+			insert into movie (title, poster, director, actor, publishyear, totalreat, genre, youtubeURL)
+			values (#{title}, #{poster}, #{director}, #{actor}, #{publishyear}, #{totalrate}, #{genre}, #{youtubeURL})
 			""")//movienum 필요???
 	public void insertMovie(MovieDto moviedto);
 	
@@ -28,17 +28,17 @@ public interface MovieMapperInter {
 	@Select("""
 			select * from movie where title = #{title}
 			""")
-	public MovieDto getMovieBytitle(String title);//제목으로 받기
+	public MovieDto getMovieByTitle(String title);//제목으로 받기
 	
 	//select : 전체 영화 조회 -> 메인화면용
 	@Select("""
-			select * from movie order by num
+			select * from movie order by movienum
 			""")
 	public List<MovieDto> getAllMovie();//전체 반환
 	
 	//update : 영화 정보 수정
 	@Update("""
-			update movie set title = #{title}, director = #{director}, actor = #{actor},
+			update movie set title = #{title}, poster = #{poster}, director = #{director}, actor = #{actor},
 		publishyear = #{publishyear}, genre = #{genre}, youtubeURL = #{youtubeURL} where movienum = #{movienum}
 			""")
 	public void updateMovie(MovieDto moviedto);

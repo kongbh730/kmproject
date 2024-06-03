@@ -1,6 +1,7 @@
 create table movie (
 	movienum smallint auto_increment primary key,
     title varchar(50),
+    poster varchar(80),
     director varchar(30),
     actor varchar(30),
     publishyear smallint,
