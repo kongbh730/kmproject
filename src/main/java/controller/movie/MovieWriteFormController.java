@@ -8,7 +8,7 @@ import data.service.MovieService;
 import naver.cloud.NcpObjectStorageService;
 
 @Controller
-public class movieFormController {
+public class MovieWriteFormController {
 	@Autowired
 	private MovieService movieService;
 	

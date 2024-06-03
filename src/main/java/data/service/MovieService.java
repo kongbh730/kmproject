@@ -31,7 +31,7 @@ public class MovieService {
 
 	public List<MovieDto> getAllMovies()
 	{
-		return movieInter.getAllMovie();
+		return movieInter.getAllMovies();
 	}
 
 	public void updateMovie(MovieDto moviedto)

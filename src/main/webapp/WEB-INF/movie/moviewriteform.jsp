@@ -59,7 +59,10 @@
 		</script>
 	</c:if>
 	
-<body>
+<body>4
+<div class="header">
+	<tiles:insertAttribute name="header"/>
+</div>
 <div>
 	<form action="./insert" method="post" enctype="multipart/form-data">
 	
