@@ -31,7 +31,7 @@ spring:
     #url 주소 수정
     username: study
     #username 수정
-    password: bitcamp!@#123W
+    password: bitcamp!@#123
     #password
     
 #mybatis setting
