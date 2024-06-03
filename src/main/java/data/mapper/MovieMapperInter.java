@@ -34,7 +34,7 @@ public interface MovieMapperInter {
 	@Select("""
 			select * from movie order by movienum
 			""")
-	public List<MovieDto> getAllMovie();//전체 반환
+	public List<MovieDto> getAllMovies();//전체 반환
 	
 	//update : 영화 정보 수정
 	@Update("""

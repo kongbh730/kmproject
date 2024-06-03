@@ -40,8 +40,6 @@
             color: white;
             align-content: center;
         }
-
-
         .header-body {
             background-color: #121212;
         }
@@ -51,12 +49,12 @@
 <div class="header-body">
     <div class="header__list">
        <span class="header-info__project">
-           <a>
+           <a href="../movie/list" style="text-decoration: none;color: white">
                MKCINEMA
            </a>
        </span>
         <span class="header-info__login">
-           <a>
+           <a href="../user/login" style="text-decoration: none;color: white">
                Sign In
            </a>
        </span>

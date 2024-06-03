@@ -17,6 +17,7 @@ public class MovieListController {
     @NonNull
     private MovieService movieService;
 
+    //영화 전체 출력을 위한 데이터 받아오기
     @GetMapping("/movie/list")
     public String movieList(Model model)
     {
