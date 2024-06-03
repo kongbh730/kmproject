@@ -1,11 +1,11 @@
 package data.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import data.dto.MovieDto;
+import org.apache.ibatis.annotations.*;
 
 import data.dto.UserDto;
+
+import java.util.Map;
 
 @Mapper
 public interface UserMapperInter {
@@ -22,17 +22,23 @@ public interface UserMapperInter {
 			""")
 	public UserDto getUserByNum(int usernum);
 	
-	
 	//update : 회원정보 수정
 	/*
 	 * 이메일, 회원번호는 그대로, 나머지 전부 수정
 	 */
 	@Update("""
-			update user set passwd
+			update user set passwd=#{passwd}, profile=#{profile}, birthday=#{birthday}, gender=#{gender};
 			""")
-	public void updateUser(int usernum);
+	public void updateUser(UserDto userdto);
 
-	
-	//delete : 회원 탈퇴 -> 수정페이지에서 탈퇴
+	//delete : 회원 탈퇴 email과 passwd가 맞았을 시에는
+	@Delete("delete from user where num=#{email} and passwd=#{passwd}")
+	public int deleteMember(Map<String, Object> map);
+
+	//select : 로그인 성공 email과 passwd가 맞았을 시에는
+	@Select("""
+            select count(*) from user where email=#{email} and passwd=#{passwd}
+            """)
+	public int isLoginCheck(String email, String pass);
 	
 }

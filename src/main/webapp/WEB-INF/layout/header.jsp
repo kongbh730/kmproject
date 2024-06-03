@@ -18,7 +18,7 @@
         .header__list {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             background-color: #121212;
             height: 56px;
@@ -40,6 +40,17 @@
             color: white;
             align-content: center;
         }
+
+        .header-info__regist {
+            position: relative;
+            color: white;
+            align-content: center;
+        }
+
+        .header-info__block {
+            color: white;
+        }
+
         .header-body {
             background-color: #121212;
         }
@@ -53,10 +64,20 @@
                MKCINEMA
            </a>
        </span>
-        <span class="header-info__login">
+       <span class="header-info__user">
+           <span class="header-info__login">
            <a href="../user/login" style="text-decoration: none;color: white">
                Sign In
            </a>
+       </span>
+       <span class="header-info__block">
+           |
+       </span>
+       <span class="header-info__regist">
+           <a href="../user/regist" style="text-decoration: none;color: white">
+               Sign Up
+           </a>
+       </span>
        </span>
     </div>
 </div>
