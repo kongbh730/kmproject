@@ -1,5 +1,4 @@
-package com.data.dto;
+package data.dto;
 
 public class MovieDto {
-
 }
