@@ -1,0 +1,32 @@
+#port setting
+server:
+  port: 8080
+# 포트 수정
+  
+#jsp setting
+spring:
+# 포워드를 jsp에서 tiles로 변경 했으므로 주석 처리
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/
+#      suffix: .jsp
+      
+#mysql setting #can erase "spring" when it is same category with above one.
+  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul
+#    username: root
+#    password: 1234
+# 5월 29일 수업 때 주석처리 
+
+#gangsa ncloud mysql db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db-n8650-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul
+    username: study
+    password: bitcamp!@#123
+    
+#mybatis setting
+mybatis:
+  type-aliases-package: data.dto
+  mapper-locations:
+  - /mapper/**/*.xml
