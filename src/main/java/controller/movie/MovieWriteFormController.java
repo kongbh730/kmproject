@@ -46,6 +46,6 @@ public class MovieWriteFormController {
 		
 		movieService.insertMovie(moviedto);
 		
-		return "redirect:./movielist";
+		return "redirect:../movie/list";//추가
 	}
 }
