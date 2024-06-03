@@ -20,7 +20,8 @@
             height: 100vh;
             background-color: black;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
         .main-body {
             background-color: black;
@@ -29,7 +30,7 @@
         }
         .movie-info {
             background-color: #121212;
-            width: 200px;
+            width: 18%;
             height: 300px;
             color: white;
         }

@@ -20,7 +20,8 @@
             height: 100vh;
             background-color: black;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-evenly;
         }
         .main-body {
             background-color: black;
@@ -28,23 +29,15 @@
             justify-content: center;
         }
         .login {
-            position: absolute;
             width: 500px;
             height: 400px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
             padding: 1em;
         }
-
         .login h1 {
             color: white;
             font: 2.5em;
             text-align: center;
         }
-
-
-
         .login input[type="text"],
         .login input[type="password"] {
             background: none;
@@ -58,10 +51,7 @@
             border-bottom: 2px solid white;
             border-radius: 3px;
             transition: 0.5s;
-
         }
-
-
         .login button {
             width: 200px;
             border-radius: 16px;
@@ -72,15 +62,12 @@
             transition: 1s;
             margin: 5px 150px;
             cursor: pointer;
-
         }
-
         .login input[type="text"]:focus,
         .login input[type="password"]:focus {
             width: 350px;
             border-radius: 0px;
         }
-
         .login button:hover {
             background-color: white;
         }
@@ -88,6 +75,9 @@
 <body>
     <div class="main-body">
         <div class="main-container">
+            <div class="randomposter" style="color: white">
+                Poster
+            </div>
             <div class="login">
                 <h1>
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">

@@ -38,13 +38,18 @@
         }
 
         .regist h1 {
-            color: white;
-            font: 2.5em;
             text-align: center;
         }
 
+        #showimg {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+        }
+
         .regist input[type="text"],
-        .regist input[type="password"] {
+        .regist input[type="password"],
+        .regist input[type="file"]{
             background: none;
             outline: none;
             padding: 10px 14px;
@@ -56,7 +61,6 @@
             border-bottom: 2px solid white;
             border-radius: 3px;
             transition: 0.5s;
-
         }
 
 
@@ -68,38 +72,144 @@
             border: 2px solid white;
             color: white;
             transition: 1s;
-            margin: 5px 150px;
+            margin: 5px 134px;
             cursor: pointer;
 
         }
 
         .regist input[type="text"]:focus,
-        .regist input[type="password"]:focus {
+        .regist input[type="password"]:focus{
             width: 350px;
             border-radius: 0px;
         }
 
         .regist button:hover {
             background-color: white;
+            color: black;
+        }
+        .radio-tile-group {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+
+            .input-container {
+                position: relative;
+                height:  80px;
+                width:  80px;
+                margin: 30px;
+
+                .radio-button {
+                    opacity: 0;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    margin: 0;
+                    cursor: pointer;
+                }
+
+                .radio-tile {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    padding: 20px;
+                    transition: transform 300ms ease;
+                }
+
+                .radio-tile .icon {
+                    margin-bottom: 20px;
+                    font-size: 25px;
+                    color: white;
+                }
+                .radio-tile-label {
+                    text-align: center;
+                    text-transform: uppercase;
+                    color: white;
+                }
+
+                .radio-button:checked + .radio-tile {
+                    background-color: white;
+                    border: 2px solid white;
+                    color: white;
+                    transform: scale(1.2, 1.2);
+
+                    .radio-tile-label {
+                        color: black;
+                        background-color: white;
+                    }
+
+                    i {
+                        color: black;
+                    }
+                }
+            }
         }
     </style>
+    <script>
+        $(function(){
+            $("#upload").change(function(){
+                //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
+                let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
+                let f=$(this)[0].files[0];
+                if(!f.type.match(reg)){
+                    alert("이미지 파일만 가능합니다");
+                    return;
+                }
+                if(f){
+                    let reader=new FileReader();
+                    reader.onload=function(e){
+                        $("#showimg").attr("src",e.target.result);
+                    }
+                    reader.readAsDataURL($(this)[0].files[0]);
+                }
+            });
+        });
+    </script>
 <body>
 <div class="main-body">
     <div class="main-container">
         <div class="regist">
             <h1>
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
-                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
-                </svg>
+                <img src="" id="showimg"
+                onerror="this.src='../image/noimage2.png'">
             </h1>
             <form action="./insert" method="post" enctype="multipart/form-data">
                 <input type="text" placeholder="email">
                 <input type="password" placeholder="password">
-                <input type="text" placeholder="profile">
                 <input type="text"
                 required="required" pattern="[0-9]{4}-[1-12]{2}-[1-31]{2}"
                 placeholder="xxxx년-xx월-xx일">
-                <input type="text" placeholder="gender">
+                <input type="file" name="upload" id="upload" class="form-control">
+                <div class="container">
+                    <div class="radio-tile-group">
+
+                        <div class="input-container">
+                            <input id="male" class="radio-button" type="radio" name="gender" />
+                            <div class="radio-tile">
+                                <div class="icon">
+                                    <i class="bi bi-gender-male"></i>
+                                </div>
+                                <label for="male" class="radio-tile-label">male</label>
+                            </div>
+                        </div>
+
+                        <div class="input-container">
+                            <input id="female" class="radio-button" type="radio" name="gender" />
+                            <div class="radio-tile">
+                                <div class="icon">
+                                    <i class="bi bi-gender-female"></i>
+                                </div>
+                                <label for="female" class="radio-tile-label">female</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
