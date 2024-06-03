@@ -14,7 +14,7 @@ import data.dto.MovieDto;
 public interface MovieMapperInter {
 	//insert : 영화 정보 추가
 	@Insert("""
-			insert into movie (title, poster, director, actor, publishyear, totalreat, genre, youtubeURL)
+			insert into movie (title, poster, director, actor, publishyear, totalrate, genre, youtubeURL)
 			values (#{title}, #{poster}, #{director}, #{actor}, #{publishyear}, #{totalrate}, #{genre}, #{youtubeURL})
 			""")//movienum 필요???
 	public void insertMovie(MovieDto moviedto);
