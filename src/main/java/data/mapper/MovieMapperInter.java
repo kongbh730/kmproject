@@ -38,7 +38,7 @@ public interface MovieMapperInter {
 	
 	//update : 영화 정보 수정
 	@Update("""
-			update movie set title = #{title}, poster=#{poster}, director = #{director}, actor = #{actor},
+			update movie set title = #{title}, poster = #{poster}, director = #{director}, actor = #{actor},
 		publishyear = #{publishyear}, genre = #{genre}, youtubeURL = #{youtubeURL} where movienum = #{movienum}
 			""")
 	public void updateMovie(MovieDto moviedto);
