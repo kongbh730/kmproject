@@ -5,11 +5,13 @@ create table movie (
     director varchar(30),
     actor varchar(30),
     publishyear smallint,
-    totalrate float,
     genre varchar(80),
     youtubeURL varchar(200)
 );
 
+insert into movie (title, poster, director, actor, publishyear, totalrate, genre, youtubeURL)
+			values ("범죄도시", "noimage.png", "이병현", "마동석", 2024, 1.5, "액션", "www.youtube.com");
+            
 select * from movie;
 drop table movie;
 

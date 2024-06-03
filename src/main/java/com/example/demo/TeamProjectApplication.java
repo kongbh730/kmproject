@@ -6,18 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-<<<<<<< HEAD
-@ComponentScan({"com.example.demo","com.data.*","naver.cloud"})
-=======
->>>>>>> branch 'main' of https://github.com/kongbh730/kmproject.git
-@ComponentScan({"com.example.demo","data.*","naver.cloud","tiles.config"})
+@ComponentScan({"com.example.demo","data.*","naver.cloud","tiles.config", "controller.*", ".movie"})
 @MapperScan("data.mapper")
 public class TeamProjectApplication {
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(TeamProjectApplication.class, args);
 	}
-
 
 }

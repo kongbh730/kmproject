@@ -26,9 +26,10 @@
     	}
     
    </style>
+   
    <script type="text/javascript">
 	$(function(){
-   	    $("#movieposter").change(function(){
+   	    $("#poster").change(function(){
    	        //console.log($(this)[0]); //type이 file인 경우 배열타입으로 넘어옴
    	        let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
    	        let f = $(this)[0].files[0];
@@ -52,6 +53,7 @@
 <body>
 <div class="container" style="width:1100px;">
 	<form action="./insert" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="movienum" value="${dto.movienum}">
 	
 	<div>
 		<table class="table table-bordered" style="width:100%;">
@@ -60,10 +62,10 @@
 					제목
 				</td>
 				<td style="width: 600px;">
-					<input type="text" name="title" id="title" class="form-control" required="required">
+					<input type="text" name="title" id="title" class="form-control" required="required" value="${dto.title}">
 				</td>
 				<td rowspan="7" style="width: 400px;">
-					<img src="" id="showposter" style="width:100%" onerror="this.src='../image/noimage2.png'"/>
+					<img src="${dto.poster}" id="showposter" style="width:100%" onerror="this.src='../image/noimage2.png'" />
 				</td>
 			</tr>
 			<tr>
@@ -71,7 +73,7 @@
 					포스터
 				</td>
 				<td>
-					<input type="file" name="movieposter" id="movieposter" class="form-control" required="required">
+					<input type="file" name="poster" id="poster" class="form-control" required="required">
 				</td>
 			</tr>
 			<tr>
@@ -79,7 +81,7 @@
 					예고편 주소
 				</td>
 				<td>
-					<input type="text" name="youtubeURL" id="youtubeURL" class="form-control" required="required">
+					<input type="text" name="youtubeURL" id="youtubeURL" class="form-control" required="required" value="${dto.youtubeURL}">
 				</td>
 			</tr>
 			<tr>
@@ -87,7 +89,7 @@
 					장르
 				</td>
 				<td>
-					<input type="text" name="genre" id="genre" class="form-control" required="required">
+					<input type="text" name="genre" id="genre" class="form-control" required="required" value="${dto.genre}">
 				</td>
 			</tr>
 			<tr>
@@ -95,7 +97,7 @@
 					감독
 				</td>
 				<td>
-					<input type="text" name="director" id="director" class="form-control" required="required">
+					<input type="text" name="director" id="director" class="form-control" required="required" value="${dto.director}">
 				</td>
 			</tr>
 			<tr>
@@ -103,7 +105,7 @@
 					출연
 				</td>
 				<td>
-					<input type="text" name="actor" id="actor" class="form-control" required="required">
+					<input type="text" name="actor" id="actor" class="form-control" required="required" value="${dto.actor}">
 				</td>
 			</tr>
 			<tr>
@@ -111,14 +113,19 @@
 					개봉년도
 				</td>
 				<td>
-					<input type="number" name="publishyear" id="publishyear" class="form-control" required="required">
+					<input type="number" name="publishyear" id="publishyear" class="form-control" required="required" value="${dto.publishyear}">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center">
-					<button type="submit">영화 저장</button>
+					<button type="submit">영화 정보 수정</button>
 					<button type="reset">초기화</button>
 					<button type="buttton" onclick="history.back()">취소</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button">삭제</button>
 				</td>
 			</tr>
 		</table>

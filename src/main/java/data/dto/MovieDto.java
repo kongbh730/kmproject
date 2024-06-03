@@ -19,7 +19,6 @@ public class MovieDto {
 	private String director;
 	private String actor;
 	private int publishyear;
-	private float totalrate;
 	private String genre;
 	private String youtubeURL;
 }
