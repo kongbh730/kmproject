@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class MovieDto {
 	private int movienum;
 	private String title;
+	private String poster;
 	private String director;
 	private String actor;
 	private int publishyear;
