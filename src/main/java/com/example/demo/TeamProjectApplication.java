@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.example.demo","data.*","naver.cloud","tiles.config"})
+@ComponentScan({"com.example.demo","data.*","naver.cloud","tiles.config","*.movie"})
 @MapperScan("data.mapper")
 public class TeamProjectApplication {
 

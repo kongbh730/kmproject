@@ -5,7 +5,7 @@
 <tiles-definitions>
 	<definition name="mainLayout" template="/WEB-INF/layout/layout1.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
-		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/movie/main.jsp"/>
 	</definition>
 	<!-- macro -->
 	<definition name="*/*" extends="mainLayout">
