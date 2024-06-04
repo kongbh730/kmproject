@@ -91,7 +91,9 @@
             <c:forEach var="moviedto" items="${list}">
                 <div class="movie-info">
                 	<div class="movie-info__img">
-                        <img src="${stpath}/${moviedto.poster}" style="width:100%; height:100%;">
+                        <a href="../review/detail?movienum=${moviedto.movienum}">
+                            <img src="${stpath}/${moviedto.poster}" style="width:100%; height:100%;">
+                        </a>
                     </div>
                     <div class="movie-info__change">
                         <a href="../movie/updateform?movienum=${moviedto.movienum}">
@@ -102,7 +104,7 @@
                     </div>
                     <div class="rating">
                         <span style="color:gold;">★</span>
-                       	<span style="color:gray;">8.9(총 평점 계산)</span>
+                       	<span style="color:white;opacity: 0.7">8.9(총 평점 계산)</span>
                     </div>
                     <div class="movie-info__title">
                         ${moviedto.title}

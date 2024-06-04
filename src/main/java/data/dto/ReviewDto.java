@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Alias("ReviewDto")
 public class ReviewDto {
 	private int reviewnum;
+	private int movienum;
 	private String movietitle;
 	private int raiting;
 	private String email;
