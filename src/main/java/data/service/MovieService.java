@@ -39,8 +39,13 @@ public class MovieService {
 		movieInter.updateMovie(moviedto);
 	}
 
-	public void deleteMove(int num)
+	public void deleteMovie(int movienum)
 	{
-		movieInter.deleteMovie(num);
+		movieInter.deleteMovie(movienum);
+	}
+	
+	public MovieDto getData(int movienum)
+	{
+		return movieInter.getData(movienum);
 	}
 }
