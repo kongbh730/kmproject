@@ -49,4 +49,9 @@ public interface MovieMapperInter {
 			""")
 	public void deleteMovie(int movienum);
 	
+	//update를 위한 해당 영화 정보 반환
+	@Select("""
+			select * from movie where movienum = #{movienum}
+			""")
+	public MovieDto getData(int movienum);
 }
