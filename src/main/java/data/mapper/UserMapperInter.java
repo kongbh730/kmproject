@@ -18,9 +18,12 @@ public interface UserMapperInter {
 	
 	//select : 전체 회원 조회가 필요한가X -> 내 정보만 확인하기?
 	@Select("""
-			select * from user where usernum = #{usernum}
+			select * from user where email=#{email}
 			""")
-	public UserDto getUserByNum(int usernum);
+	public UserDto getUserById(String email);
+
+	@Update("update user set profile=#{profile} where email=#{email}")
+	public void updatePhoto(Map<String, Object> map);
 
 	@Select("select count(*) from user where email=#{searchid}")
 	public int getIdCheckCount(String searchid);
@@ -35,7 +38,7 @@ public interface UserMapperInter {
 	public void updateUser(UserDto userdto);
 
 	//delete : 회원 탈퇴 email과 passwd가 맞았을 시에는
-	@Delete("delete from user where num=#{email} and passwd=#{passwd}")
+	@Delete("delete from user where email=#{email} and passwd=#{passwd}")
 	public int deleteMember(Map<String, Object> map);
 
 	//select : 로그인 성공 email과 passwd가 맞았을 시에는

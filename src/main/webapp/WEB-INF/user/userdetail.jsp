@@ -151,85 +151,81 @@
             }
         }
     </style>
+    <c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-kbh-37/duoproject"></c:set>
     <script>
-        $(function(){
-            $("#upload").change(function(){
-                //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
-                let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
-                let f=$(this)[0].files[0];
-                if(!f.type.match(reg)){
-                    alert("이미지 파일만 가능합니다");
-                    return;
-                }
-                if(f){
-                    let reader=new FileReader();
-                    reader.onload=function(e){
-                        $("#showimg").attr("src",e.target.result);
-                    }
-                    reader.readAsDataURL($(this)[0].files[0]);
-                }
-            });
-        });
-
-        let jungbok=false;
-
-        $(function(){
-            $("#myfile").change(function(){
-                //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
-                let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
-                let f=$(this)[0].files[0];
-                if(!f.type.match(reg)){
-                    alert("이미지 파일만 가능합니다");
-                    return;
-                }
-                if(f){
-                    let reader=new FileReader();
-                    reader.onload=function(e){
-                        $("#showimg1").attr("src",e.target.result);
-                    }
-                    reader.readAsDataURL($(this)[0].files[0]);
-                }
-            });
-
-            //중복버튼 이벤트
-            $("#btncheckid").click(function(){
-                if($("#email").val()==''){
-                    alert("가입할 아이디를 입력해주세요");
-                    return;
-                }
-
+        $(function() {
+            $("#photoupload").change(function(){
+                let form=new FormData();
+                form.append("upload",$("#photoupload")[0].files[0]);
+                form.append("email",${userdto.email});
                 $.ajax({
-                    type:"get",
+                    type:"post",
                     dataType:"json",
-                    url:"./idcheck",
-                    data:{"searchid":$("#email").val()},
+                    data:form,
+                    url:"./upload",
+                    processData:false,
+                    contentType:false,
                     success:function(data){
-                        if(data.count==0){
-                            alert("가입 가능한 아이디입니다");
-                            jungbok=true;
-                        }else{
-                            alert("이미 가입되어있는 아이디입니다");
-                            jungbok=false;
-                            $("#email").val("");
-                        }
+                        $("#profile").attr("src","${stpath}/"+data.photoname);
                     }
                 });
             });
+            $("#upload").change(function () {
+                //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
+                let reg = /(.*?)\/(jpg|jpeg|png|gif)$/;
+                let f = $(this)[0].files[0];
+                if (!f.type.match(reg)) {
+                    alert("이미지 파일만 가능합니다");
+                    return;
+                }
+                if (f) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#showimg").attr("src", e.target.result);
+                    }
+                    reader.readAsDataURL($(this)[0].files[0]);
+                }
+                let jungbok = false;
 
-            //아이디를 입력시 다시 중복확인을 누르도록 중복변수를 초기화
-            $("#email").keyup(function(){
-                jungbok=false;
-            });
-        });  //close function
+                //중복버튼 이벤트
+                $("#btncheckid").click(function () {
+                    if ($("#email").val() == '') {
+                        alert("가입할 아이디를 입력해주세요");
+                        return;
+                    }
+
+                    $.ajax({
+                        type: "get",
+                        dataType: "json",
+                        url: "./idcheck",
+                        data: {"searchid": $("#email").val()},
+                        success: function (data) {
+                            if (data.count == 0) {
+                                alert("가입 가능한 아이디입니다");
+                                jungbok = true;
+                            } else {
+                                alert("이미 가입되어있는 아이디입니다");
+                                jungbok = false;
+                                $("#email").val("");
+                            }
+                        }
+                    });
+                });
+
+                //아이디를 입력시 다시 중복확인을 누르도록 중복변수를 초기화
+                $("#email").keyup(function () {
+                    jungbok = false;
+                });
+            });  //close function
 
 
-        function check()
-        {
-            if(!jungbok){
-                alert("아이디 중복확인을 해주세요");
-                return false;//false반환시 action 실행을 안함
+            function check() {
+                if (!jungbok) {
+                    alert("아이디 중복확인을 해주세요");
+                    return false;//false반환시 action 실행을 안함
+                }
             }
-        }
+        })
 
     </script>
 <body>
@@ -237,20 +233,24 @@
     <div class="main-container">
         <div class="regist">
             <h1>
-                <img src="" id="showimg"
-                onerror="this.src='../image/noimage2.png'">
+                <img src="${stpath}/${userdto.profile}" id="showimg"
+                     onerror="this.src='../image/noimage2.png'">
+                <input type="file" name="upload" id="photoupload" class="form-control" style="display: none">
+                <button type="button" class="btn btn-success btn-sm"
+                        onclick="$('#photoupload').trigger('click')">
+                    사진수정</button>
             </h1>
-            <form action="./insert" method="post" enctype="multipart/form-data">
-                <input type="text" name="email" placeholder="email">
-                <input type="password" name="passwd" placeholder="password">
+            <form action="./update" method="post" enctype="multipart/form-data">
+                <input type="text" name="email" placeholder="email" value="${userdto.email}">
+                <input type="password" name="passwd" placeholder="password" value="${userdto.passwd}">
                 <input type="text" name="birthday"
-                required="required" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-                placeholder="birthday">
-                <input type="file" name="upload" id="upload" class="form-control">
+                       required="required" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                       placeholder="birthday" value="${userdto.birthday}">
                 <div class="container">
                     <div class="radio-tile-group">
+
                         <div class="input-container">
-                            <input id="male" class="radio-button" type="radio" name="gender" />
+                            <input id="male" class="radio-button" type="radio" name="gender"/>
                             <div class="radio-tile">
                                 <div class="icon">
                                     <i class="bi bi-gender-male"></i>
@@ -258,6 +258,7 @@
                                 <label for="male" class="radio-tile-label">male</label>
                             </div>
                         </div>
+
                         <div class="input-container">
                             <input id="female" class="radio-button" type="radio" name="gender" />
                             <div class="radio-tile">
@@ -269,7 +270,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit">Correction</button>
             </form>
         </div>
     </div>

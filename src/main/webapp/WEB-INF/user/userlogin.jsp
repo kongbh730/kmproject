@@ -35,7 +35,7 @@
         }
         .login h1 {
             color: white;
-            font: 2.5em;
+            font-size: 2.5em;
             text-align: center;
         }
         .login input[type="text"],
@@ -110,7 +110,7 @@
     <div class="main-body">
         <div class="main-container">
             <div class="randomposter" style="color: white">
-                Poster
+                <img src=""
             </div>
             <div class="login">
                 <h1>
