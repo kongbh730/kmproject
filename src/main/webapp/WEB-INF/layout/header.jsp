@@ -13,12 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap"
           rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <link href="../css/style.css" rel="stylesheet">
     <style>
         .header__list {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             background-color: #121212;
             height: 56px;
@@ -34,12 +33,22 @@
             text-decoration:none;
         }
 
-
         .header-info__login {
             position: relative;
             color: white;
             align-content: center;
         }
+
+        .header-info__regist {
+            position: relative;
+            color: white;
+            align-content: center;
+        }
+
+        .header-info__block {
+            color: white;
+        }
+
         .header-body {
             background-color: #121212;
         }
@@ -53,10 +62,20 @@
                MKCINEMA
            </a>
        </span>
-        <span class="header-info__login">
+       <span class="header-info__user">
+           <span class="header-info__login">
            <a href="../user/login" style="text-decoration: none;color: white">
                Sign In
            </a>
+       </span>
+       <span class="header-info__block">
+           |
+       </span>
+       <span class="header-info__regist">
+           <a href="../user/regist" style="text-decoration: none;color: white" class="">
+               Sign Up
+           </a>
+       </span>
        </span>
     </div>
 </div>
