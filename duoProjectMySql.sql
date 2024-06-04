@@ -33,6 +33,7 @@ drop table user;
 
 create table review (
 	reviewnum smallint auto_increment primary key,
+    movienum smallint,
     movietitle varchar(50),
     rating smallint,
     email varchar(30),
