@@ -18,7 +18,7 @@ public class ReviewDto {
 	private int reviewnum;
 	private int movienum;
 	private String movietitle;
-	private int raiting;
+	private int rating;
 	private String email;
 	private Timestamp writeday;
 	private String content;
