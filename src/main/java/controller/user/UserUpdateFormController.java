@@ -37,25 +37,9 @@ public class UserUpdateFormController {
             HttpServletRequest request
     )
     {
-//        String savePath = request.getSession().getServletContext().getRealPath("/save");
-//
-//        //업로드한 파일의 확장자 분리
-//        String ext=upload.getOriginalFilename().split("\\.")[1];
-//        //업로드할 파일명
-//        String photo= UUID.randomUUID()+"."+ext;
-//
-//        //실제 업로드
-//        try {
-//            upload.transferTo(new File(savePath+"/",photo));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-        //스토리지에 업로드하기
         String profile=storageService.uploadFile(bucketName, folderName, upload);
 
         userService.updatePhoto(email,profile);
-        //db에서 photo 수정
 
         Map<String, String> map = new HashMap<>();
         map.put("photoname",profile);

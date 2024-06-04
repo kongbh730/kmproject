@@ -23,7 +23,7 @@ public interface UserMapperInter {
 	public UserDto getUserById(String email);
 
 	@Update("update user set profile=#{profile} where email=#{email}")
-	public void updatePhoto(Map<String, Object> map);
+	public void updatePhoto(Map<String, String> map);
 
 	@Select("select count(*) from user where email=#{searchid}")
 	public int getIdCheckCount(String searchid);

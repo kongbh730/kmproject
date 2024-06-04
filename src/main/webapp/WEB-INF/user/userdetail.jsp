@@ -151,83 +151,28 @@
             }
         }
     </style>
-    <c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-kbh-37/duoproject"></c:set>
     <script>
-        $(function() {
-            $("#photoupload").change(function(){
-                let form=new FormData();
-                form.append("upload",$("#photoupload")[0].files[0]);
-                form.append("email",${userdto.email});
-                $.ajax({
-                    type:"post",
-                    dataType:"json",
-                    data:form,
-                    url:"./upload",
-                    processData:false,
-                    contentType:false,
-                    success:function(data){
-                        $("#profile").attr("src","${stpath}/"+data.photoname);
-                    }
-                });
-            });
-            $("#upload").change(function () {
+        $(function(){
+            $("#upload").change(function(){
                 //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
-                let reg = /(.*?)\/(jpg|jpeg|png|gif)$/;
-                let f = $(this)[0].files[0];
-                if (!f.type.match(reg)) {
+                let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
+                let f=$(this)[0].files[0];
+                if(!f.type.match(reg)){
                     alert("이미지 파일만 가능합니다");
                     return;
                 }
-                if (f) {
-                    let reader = new FileReader();
-                    reader.onload = function (e) {
-                        $("#showimg").attr("src", e.target.result);
+                if(f){
+                    let reader=new FileReader();
+                    reader.onload=function(e){
+                        $("#showimg").attr("src",e.target.result);
                     }
                     reader.readAsDataURL($(this)[0].files[0]);
                 }
-                let jungbok = false;
-
-                //중복버튼 이벤트
-                $("#btncheckid").click(function () {
-                    if ($("#email").val() == '') {
-                        alert("가입할 아이디를 입력해주세요");
-                        return;
-                    }
-
-                    $.ajax({
-                        type: "get",
-                        dataType: "json",
-                        url: "./idcheck",
-                        data: {"searchid": $("#email").val()},
-                        success: function (data) {
-                            if (data.count == 0) {
-                                alert("가입 가능한 아이디입니다");
-                                jungbok = true;
-                            } else {
-                                alert("이미 가입되어있는 아이디입니다");
-                                jungbok = false;
-                                $("#email").val("");
-                            }
-                        }
-                    });
-                });
-
-                //아이디를 입력시 다시 중복확인을 누르도록 중복변수를 초기화
-                $("#email").keyup(function () {
-                    jungbok = false;
-                });
-            });  //close function
-
-
-            function check() {
-                if (!jungbok) {
-                    alert("아이디 중복확인을 해주세요");
-                    return false;//false반환시 action 실행을 안함
-                }
-            }
-        })
+            });
+        });
 
     </script>
+    <c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-kbh-37/duoproject"></c:set>
 <body>
 <div class="main-body">
     <div class="main-container">
@@ -235,12 +180,10 @@
             <h1>
                 <img src="${stpath}/${userdto.profile}" id="showimg"
                      onerror="this.src='../image/noimage2.png'">
-                <input type="file" name="upload" id="photoupload" class="form-control" style="display: none">
-                <button type="button" class="btn btn-success btn-sm"
-                        onclick="$('#photoupload').trigger('click')">
-                    사진수정</button>
             </h1>
-            <form action="./update" method="post" enctype="multipart/form-data">
+            <form action="./upload" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="profile" value="${stpath}/${userdto.profile}">
+                <input type="file" name="upload" id="upload" class="form-control">
                 <input type="text" name="email" placeholder="email" value="${userdto.email}">
                 <input type="password" name="passwd" placeholder="password" value="${userdto.passwd}">
                 <input type="text" name="birthday"
