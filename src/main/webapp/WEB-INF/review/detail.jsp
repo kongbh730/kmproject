@@ -173,7 +173,10 @@
                 </div>
             </div>
             <div class="movie-detail-review">
-                후기작성
+            
+            	<div>
+    				<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#reviewModal">후기작성</button>
+				</div>
             </div>
         </div>
         <div class="movie-detail-body">
@@ -182,7 +185,16 @@
                     <img src="${stpath}/${moviedto.poster}">
                 </div>
                 <div class="movie-detail-body-url">
-                    ${moviedto.youtubeURL}
+                    <%-- ${moviedto.youtubeURL} --%>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+						<!-- 예고편 자동재생 -->
+						<iframe width="100%" height="410px"
+							src="${moviedto.youtubeURL}?autoplay=1&mute=1"
+							title="YouTube video player" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+						</iframe>
+					</div>
                 </div>
             </div>
         </div>
@@ -201,13 +213,30 @@
         </div>
     </div>
 </div>
+
 <div class="review-body">
+
+<c:forEach begin="0" end="10" step="1">
+	hello
+</c:forEach>
+<br>
+
+		<c:forEach var="review" items="${reviews}">
+            <div class="review">
+                <h3>${review.title}</h3>
+                <p>${review.content}</p>
+                <p><strong>Rating:</strong> ${review.rating}</p>
+            </div>
+        </c:forEach>
 
 </div>
 <!-- The Modal -->
 <form action="./reviewinsert" class="review-input" name="reviewform" id="reviewform" method="post">
+
 <input type="hidden" name="movienum" value="${moviedto.movienum}">
 <input type="hidden" name="movietitle" value="${moviedto.title}">
+<input type="hidden" name="email" value="${userdto.email}">
+
 <div class="modal" id="reviewModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -256,10 +285,5 @@
   </div>
 </div>
 </form>	
-    
-    <div>
-    	<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#reviewModal">후기작성</button>
-    </div>
-   
 </body>
 </html>

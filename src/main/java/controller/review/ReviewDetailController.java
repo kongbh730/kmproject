@@ -4,6 +4,7 @@ import data.dto.MovieDto;
 import data.dto.ReviewDto;
 import data.service.MovieService;
 import data.service.ReviewService;
+import data.service.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import naver.cloud.NcpObjectStorageService;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,9 @@ public class ReviewDetailController {
     @NonNull
     private MovieService movieService;
     
+    @NonNull
+    private UserService userService;
+    
     @Autowired
     private ReviewService reviewService;
     
@@ -43,6 +48,7 @@ public class ReviewDetailController {
   	//==========================================================================
   	 */
 
+    // moviedto 읽기
     @GetMapping("/review/detail")
     public String reviewDetail(
             @RequestParam int movienum,
@@ -55,6 +61,7 @@ public class ReviewDetailController {
         return "review/detail";
     }
     
+    //저장
 	@PostMapping("/review/reviewinsert")
 	public String saveData(
 			@ModelAttribute ReviewDto reviewdto,
@@ -65,4 +72,11 @@ public class ReviewDetailController {
 		
 		return "redirect:../review/detail?movienum=" + movienum;
 	}
+	
+	@GetMapping("/movie/detail")
+    public String getMovieDetail(@RequestParam("movienum") int movienum, Model model) {
+        List<ReviewDto> reviews = reviewService.getReviewsByMovieNum(movienum);
+        model.addAttribute("reviews", reviews);
+        return "detail";
+    }
 }
