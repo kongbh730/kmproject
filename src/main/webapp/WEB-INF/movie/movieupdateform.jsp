@@ -19,16 +19,46 @@
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <style>
-body * {
-	font-family: 'Jua';
+body {
+    background-color: black;
+    color: white;
 }
 
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 50px;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
+
+.table {
+    background-color: black;
+    color: white;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table td {
+	color: white;
+    border: 1px solid black;
+    background-color: black;
+}
+
+.table input {
+	/*background-color: gray;*/
+	border: 5px solid black;
+}
+
+.form-control {
+    transition: transform 0.2s;
+}
+
+.form-control:focus {
+    transform: scale(1.10);
+}
+
 </style>
 
 <!-- NCP사용을 위해 추가 -->
@@ -57,6 +87,7 @@ body * {
 </head>
 
 <body>
+<h1 align="center"><b>MOVIE UPDATE</b></h1>
 	<div class="container" style="width: 1100px;">
 		<div class="header">
 			<tiles:insertAttribute name="header"/>
@@ -65,10 +96,10 @@ body * {
 			<form action="./updatemovie" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="movienum" value="${moviedto.movienum}">
 				<div>
-					<table class="table table-bordered" style="width: 100%;">
+					<table class="table" style="width: 100%;">
 						<tr>
-							<td style="width: 100px;">제목</td>
-							<td style="width: 600px;"><input type="text" name="title"
+							<td style="width: 150px;"><b>제목</b></td>
+							<td style="width: 550px;"><input type="text" name="title"
 								id="title" class="form-control" required="required"
 								value="${moviedto.title}"></td>
 							<td rowspan="7" style="width: 400px;"><img
@@ -76,50 +107,49 @@ body * {
 								onerror="this.src='../image/noimage2.png'" /></td>
 						</tr>
 						<tr>
-							<td>포스터</td>
+							<td><b>포스터</b></td>
 							<td><input type="file" name="movieposter" id="movieposter"
 								class="form-control"></td>
 						</tr>
 						<tr>
-							<td>예고편 주소</td>
+							<td><b>예고편 주소</b></td>
 							<td><input type="text" name="youtubeURL" id="youtubeURL"
 								class="form-control" required="required"
 								value="${moviedto.youtubeURL}"></td>
 						</tr>
 						<tr>
-							<td>장르</td>
+							<td><b>장르</b></td>
 							<td><input type="text" name="genre" id="genre"
 								class="form-control" required="required"
 								value="${moviedto.genre}"></td>
 						</tr>
 						<tr>
-							<td>감독</td>
+							<td><b>감독</b></td>
 							<td><input type="text" name="director" id="director"
 								class="form-control" required="required"
 								value="${moviedto.director}"></td>
 						</tr>
 						<tr>
-							<td>출연</td>
+							<td><b>출연</b></td>
 							<td><input type="text" name="actor" id="actor"
 								class="form-control" required="required"
 								value="${moviedto.actor}"></td>
 						</tr>
 						<tr>
-							<td>개봉년도</td>
+							<td><b>개봉년도</b></td>
 							<td><input type="number" name="publishyear" id="publishyear"
 								class="form-control" required="required"
 								value="${moviedto.publishyear}"></td>
 						</tr>
 						<tr>
 							<td colspan="3" align="center">
-								<button type="submit">영화 정보 수정</button>
-								<button type="reset">초기화</button>
-								<button type="button" onclick="history.back()">취소</button>
+								<button type="submit" class="btn btn-success" style="width: 30%"><b></b><i class="bi bi-save"></i>&nbsp;수정</b></button>
+								<button type="button" class="btn btn-success" onclick="history.back()" style="width: 30%"><b><i class="bi bi-x-square"></i>&nbsp;취소</b></button>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3" align="center">
-								<button type="button" onclick="del()">영화 정보 삭제</button>
+								<button type="button" class="btn btn-danger" onclick="del()" style="width: 60%"><b><i class="bi bi-trash"></i>&nbsp;삭제</b></button>
 							</td>
 						</tr>
 					</table>
