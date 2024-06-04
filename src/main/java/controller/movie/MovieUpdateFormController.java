@@ -54,9 +54,16 @@ public class MovieUpdateFormController {
 			HttpServletRequest request
 			)
 	{
-		String uploadphoto = storageService.uploadFile(bucketName, folderName, upload);
-		
-		moviedto.setPoster(uploadphoto);
+		if(!upload.isEmpty())//새 이미지 파일 업로드된 경우
+		{
+			String uploadphoto = storageService.uploadFile(bucketName, folderName, upload);
+			moviedto.setPoster(uploadphoto);
+		}
+		else//이미지 파일이 업로드 안된 경우, 기존 이미지 사용
+		{
+			String existposter = movieService.getData(moviedto.getMovienum()).getPoster();
+			moviedto.setPoster(existposter);
+		}
 		movieService.updateMovie(moviedto);
 		
 		return "redirect:../movie/list";

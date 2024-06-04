@@ -9,8 +9,8 @@ create table movie (
     youtubeURL varchar(200)
 );
 
-insert into movie (title, poster, director, actor, publishyear, totalrate, genre, youtubeURL)
-			values ("범죄도시", "noimage.png", "이병현", "마동석", 2024, 1.5, "액션", "www.youtube.com");
+insert into movie (title, poster, director, actor, publishyear, genre, youtubeURL)
+			values ("범죄도시", "noimage.png", "이병현", "마동석", 2024, "액션", "www.youtube.com");
             
 select * from movie;
 drop table movie;
@@ -22,7 +22,7 @@ create table user (
     email varchar(30),
     passwd varchar(20),
     profile varchar(80),
-    birthday datetime,
+    birthday varchar(20),
     gender boolean
 );
 
