@@ -19,9 +19,9 @@ public class MovieService {
 		movieInter.insertMovie(moviedto);
 	}
 
-	public MovieDto getMovieByNum(int num)
+	public MovieDto getMovieByNum(int movienum)
 	{
-		return movieInter.getMovieByNum(num);
+		return movieInter.getMovieByNum(movienum);
 	}
 
 	public MovieDto getMovieByTitle(String title)
