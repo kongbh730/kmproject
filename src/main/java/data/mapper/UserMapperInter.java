@@ -21,6 +21,9 @@ public interface UserMapperInter {
 			select * from user where usernum = #{usernum}
 			""")
 	public UserDto getUserByNum(int usernum);
+
+	@Select("select count(*) from user where email=#{searchid}")
+	public int getIdCheckCount(String searchid);
 	
 	//update : 회원정보 수정
 	/*
@@ -39,6 +42,6 @@ public interface UserMapperInter {
 	@Select("""
             select count(*) from user where email=#{email} and passwd=#{passwd}
             """)
-	public int isLoginCheck(String email, String pass);
+	public int isLoginCheck(String email, String passwd);
 	
 }

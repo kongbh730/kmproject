@@ -29,8 +29,8 @@
         .header-info__project {
             position: relative;
             color: white;
-            margin : 10px;
-            text-decoration:none;
+            margin: 10px;
+            text-decoration: none;
         }
 
         .header-info__login {
@@ -53,7 +53,24 @@
             background-color: #121212;
         }
     </style>
+    <c:set var="root" value="<%=request.getContextPath()%>"/>
+    <script type="text/javascript">
+        $(function () {
+            $("#alogout").click(function () {
+                $.ajax({
+                    type: "get",
+                    dataType: "text",
+                    url: `${root}/user/logout`,
+                    success: function () {
+                        location.href = `${root}/movie/list`;
+                    }
+                })
+            })
+        });
+
+    </script>
 </head>
+<c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-kbh-37/duoproject"/>
 <body>
 <div class="header-body">
     <div class="header__list">
@@ -62,21 +79,39 @@
                MKCINEMA
            </a>
        </span>
-       <span class="header-info__user">
+        <c:if test="${sessionScope.loginok==null}">
+        <span class="header-info__user">
            <span class="header-info__login">
-           <a href="../user/login" style="text-decoration: none;color: white">
+           <a href="../user/signin" style="text-decoration: none;color: white">
                Sign In
            </a>
-       </span>
-       <span class="header-info__block">
+           </span>
+            <span class="header-info__block">
            |
        </span>
-       <span class="header-info__regist">
+            <span class="header-info__regist">
            <a href="../user/regist" style="text-decoration: none;color: white" class="">
                Sign Up
            </a>
        </span>
-       </span>
+            </span>
+        </c:if>
+        <c:if test="${sessionScope.loginok!=null}">
+           <span class="header-info__user">
+                <span class="header-info__login">
+                <a href="../user/update" style="text-decoration: none;color: white">
+                        <img src="${stpath}/${userdto.profile}">
+                </a>
+                </span>
+            <span class="header-info__block">
+           |
+           </span>
+            <span class="header-info__logout">
+                <button type="button" id="alogout" style="border-style: none;background-color: #121212;color: white">Log Out
+                </button>
+           </span>
+            </span>
+        </c:if>
     </div>
 </div>
 </body>

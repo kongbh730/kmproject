@@ -39,8 +39,13 @@ public class UserService {
 
 	}
 
-	public boolean isLoginCheck(String email,String pass)
+	public boolean isLoginCheck(String email,String passwd)
 	{
-		return userInter.isLoginCheck(email,pass)==1?true:false;
+		return userInter.isLoginCheck(email,passwd)==1?true:false;
+	}
+
+	public int getIdCheckCount(String searchid)
+	{
+		return userInter.getIdCheckCount(searchid);
 	}
 }

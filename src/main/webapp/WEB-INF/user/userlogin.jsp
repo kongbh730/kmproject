@@ -72,6 +72,40 @@
             background-color: white;
         }
     </style>
+    <c:set var="root" value="<%=request.getContextPath()%>"/>
+    <script type="text/javascript">
+        $(function(){
+            $("#loginfrm").submit(function(e){
+                e.preventDefault();
+                let fdata=$(this).serialize();
+                //alert(fdata);
+                $.ajax({
+                    type:"get",
+                    dataType:"json",
+                    url:`${root}/user/login`,
+                    data:fdata,
+                    success:function(data){
+                        if(data.status=='success'){
+                            location.href=`${root}/movie/list`;
+                        }else {
+                            alert("아이디 또는 비밀번호가 맞지 않습니다");
+                        }
+                    }
+                });
+            });
+            $("#alogout").click(function(){
+                $.ajax({
+                    type: "get",
+                    dataType: "text",
+                    url:`${root}/user/logout`,
+                    success:function(){
+                        location.href=`${root}/movie/list`;
+                    }
+                })
+            })
+        });//close function
+
+    </script>
 <body>
     <div class="main-body">
         <div class="main-container">
@@ -81,16 +115,14 @@
             <div class="login">
                 <h1>
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
-                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
-                </svg>
+                        <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
+                    </svg>
                 </h1>
-                <form>
-                    <input type="text" placeholder="email">
-                    <input type="password" placeholder="password">
-                    <button type="submit">login</button>
+                <form id="loginfrm">
+                    <input type="text" name="loginemail" placeholder="email">
+                    <input type="password" name="pass" placeholder="password">
+                    <button type="submit">Log In</button>
                 </form>
-
-
             </div>
         </div>
     </div>
