@@ -20,9 +20,9 @@ public class UserService {
 		userInter.insertUser(userdto);
 	}
 
-	public UserDto getUserByNum(int usernum)
+	public UserDto getUserById(String email)
 	{
-		return userInter.getUserByNum(usernum);
+		return userInter.getUserById(email);
 	}
 
 	public void updateUser(UserDto userdto)
@@ -30,13 +30,21 @@ public class UserService {
 		userInter.updateUser(userdto);
 	}
 
-	public boolean deleteUser(int usernum,String passwd)
+	public boolean deleteUser(String email,String passwd)
 	{
 		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("usernum", usernum);
+		map.put("email", email);
 		map.put("passwd", passwd);
 		return userInter.deleteMember(map)==1?true:false;
 
+	}
+
+	public void updatePhoto(String email,String profile)
+	{
+		Map<String, Object> map=new HashMap<>();
+		map.put("email",email);
+		map.put("profile",profile);
+		userInter.updatePhoto(map);
 	}
 
 	public boolean isLoginCheck(String email,String passwd)
