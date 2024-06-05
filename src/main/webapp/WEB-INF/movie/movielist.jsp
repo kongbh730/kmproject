@@ -14,6 +14,10 @@
           rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <style>
+    	* body{
+    		background-color : black;	
+    	}
+    	
         .main-container {
             margin-top: 30px;
             width: 1280px;
@@ -29,6 +33,7 @@
             justify-content: center;
         }
         .movie-info {
+        	margin-top: 40px;
             background-color: #121212;
             width: 18%;
             height: 500px;
