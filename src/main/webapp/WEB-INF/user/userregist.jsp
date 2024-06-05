@@ -173,24 +173,6 @@
 
         let jungbok=false;
 
-        $(function(){
-            $("#myfile").change(function(){
-                //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
-                let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
-                let f=$(this)[0].files[0];
-                if(!f.type.match(reg)){
-                    alert("이미지 파일만 가능합니다");
-                    return;
-                }
-                if(f){
-                    let reader=new FileReader();
-                    reader.onload=function(e){
-                        $("#showimg1").attr("src",e.target.result);
-                    }
-                    reader.readAsDataURL($(this)[0].files[0]);
-                }
-            });
-
             //중복버튼 이벤트
             $("#btncheckid").click(function(){
                 if($("#email").val()==''){
@@ -215,21 +197,6 @@
                     }
                 });
             });
-
-            //아이디를 입력시 다시 중복확인을 누르도록 중복변수를 초기화
-            $("#email").keyup(function(){
-                jungbok=false;
-            });
-        });  //close function
-
-
-        function check()
-        {
-            if(!jungbok){
-                alert("아이디 중복확인을 해주세요");
-                return false;//false반환시 action 실행을 안함
-            }
-        }
 
     </script>
 <body>
