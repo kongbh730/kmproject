@@ -171,53 +171,29 @@
             });
         });
 
-        let jungbok=false;
-
-            //중복버튼 이벤트
-            $("#btncheckid").click(function(){
-                if($("#email").val()==''){
-                    alert("가입할 아이디를 입력해주세요");
-                    return;
-                }
-
-                $.ajax({
-                    type:"get",
-                    dataType:"json",
-                    url:"./idcheck",
-                    data:{"searchid":$("#email").val()},
-                    success:function(data){
-                        if(data.count==0){
-                            alert("가입 가능한 아이디입니다");
-                            jungbok=true;
-                        }else{
-                            alert("이미 가입되어있는 아이디입니다");
-                            jungbok=false;
-                            $("#email").val("");
-                        }
-                    }
-                });
-            });
-
     </script>
+    <c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-kbh-37/duoproject"></c:set>
 <body>
 <div class="main-body">
     <div class="main-container">
         <div class="regist">
             <h1>
-                <img src="" id="showimg"
-                onerror="this.src='../image/noimage2.png'">
+                <img src="${stpath}/${userdto.profile}" id="showimg"
+                     onerror="this.src='../image/noimage2.png'">
             </h1>
-            <form action="./insert" method="post" enctype="multipart/form-data">
-                <input type="text" name="email" placeholder="email">
-                <input type="password" name="passwd" placeholder="password">
-                <input type="text" name="birthday"
-                required="required" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-                placeholder="birthday">
+            <form action="./update" method="post" enctype="multipart/form-data">
+<%--                <input type="hidden" name="email" value="${userdto.email}">--%>
                 <input type="file" name="upload" id="upload" class="form-control">
+                <input type="text" name="email" placeholder="email" value="${userdto.email}">
+                <input type="password" name="passwd" placeholder="password" value="${userdto.passwd}">
+                <input type="text" name="birthday"
+                       required="required" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                       placeholder="birthday" value="${userdto.birthday}">
                 <div class="container">
                     <div class="radio-tile-group">
+
                         <div class="input-container">
-                            <input id="male" class="radio-button" type="radio" name="gender" />
+                            <input id="male" class="radio-button" type="radio" name="gender"/>
                             <div class="radio-tile">
                                 <div class="icon">
                                     <i class="bi bi-gender-male"></i>
@@ -225,6 +201,7 @@
                                 <label for="male" class="radio-tile-label">male</label>
                             </div>
                         </div>
+
                         <div class="input-container">
                             <input id="female" class="radio-button" type="radio" name="gender" />
                             <div class="radio-tile">
@@ -236,7 +213,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit">Correction</button>
             </form>
         </div>
     </div>
