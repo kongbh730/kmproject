@@ -74,11 +74,16 @@
 <body>
 <div class="header-body">
     <div class="header__list">
-       <span class="header-info__project">
+       <!-- <span class="header-info__project">
            <a href="../movie/list" style="text-decoration: none;color: white">
                MKCINEMA
            </a>
-       </span>
+       </span> -->
+       <span class="header-info__project">
+    		<a href="../movie/list" style="text-decoration: none; color: black; background-color: gold; border-radius: 8px; padding: 5px 10px; font-size: 20px;">
+        		<b>MKCINEMA</b>
+   		 	</a>
+		</span>
         <c:if test="${sessionScope.loginok==null}">
         <span class="header-info__user">
            <span class="header-info__login">
@@ -99,9 +104,9 @@
         <c:if test="${sessionScope.loginok!=null}">
            <span class="header-info__user">
                 <span class="header-info__login">
-                <a href="../user/update" style="text-decoration: none;color: white">
-                        <img src="${stpath}/${userdto.profile}">
-                </a>
+                    <a href="../user/detail?email=${sessionScope.loginid}" style="text-decoration: none;color: white">
+                         ${sessionScope.loginid}님
+                    </a>
                 </span>
             <span class="header-info__block">
            |
