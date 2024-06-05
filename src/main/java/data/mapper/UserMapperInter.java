@@ -33,7 +33,7 @@ public interface UserMapperInter {
 	 * 이메일, 회원번호는 그대로, 나머지 전부 수정
 	 */
 	@Update("""
-			update user set passwd=#{passwd}, profile=#{profile}, birthday=#{birthday}, gender=#{gender};
+			update user set passwd=#{passwd}, profile=#{profile}, birthday=#{birthday}, gender=#{gender} where email=#{email}")";
 			""")
 	public void updateUser(UserDto userdto);
 

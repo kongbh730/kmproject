@@ -1,6 +1,5 @@
 package controller.user;
 
-import com.amazonaws.services.ec2.model.UserData;
 import data.dto.UserDto;
 import data.service.UserService;
 import lombok.NonNull;
@@ -29,23 +28,23 @@ public class UserUpdateFormController {
     @Autowired
     private NcpObjectStorageService storageService;
 
-    @ResponseBody
-    @PostMapping("/upload")
-    public Map<String, String> uploadPhoto(
-            @RequestParam("upload") MultipartFile upload,
-            @RequestParam String email,
-            HttpServletRequest request
-    )
-    {
-        String profile=storageService.uploadFile(bucketName, folderName, upload);
-
-        userService.updatePhoto(email,profile);
-
-        Map<String, String> map = new HashMap<>();
-        map.put("photoname",profile);
-
-        return map;
-    }
+//    @ResponseBody
+//    @PostMapping("/upload")
+//    public Map<String, String> uploadPhoto(
+//            @RequestParam("upload") MultipartFile upload,
+//            @RequestParam String email,
+//            HttpServletRequest request
+//    )
+//    {
+//        String profile=storageService.uploadFile(bucketName, folderName, upload);
+//
+//        userService.updatePhoto(email,profile);
+//
+//        Map<String, String> map = new HashMap<>();
+//        map.put("photoname",profile);
+//
+//        return map;
+//    }
 
     @GetMapping("/user/detail")
     public String detail(@RequestParam String email, Model model)
@@ -55,11 +54,22 @@ public class UserUpdateFormController {
         return "user/userdetail";
     }
 
+    @ResponseBody
     @PostMapping("/user/update")
-    public String update(@ModelAttribute UserDto userdto)
+    public String updateData(
+            @ModelAttribute UserDto userdto,
+            @RequestParam("upload") MultipartFile upload,
+            HttpServletRequest request
+    )
     {
+        //스토리지에 업로드하기
+        String profile=storageService.uploadFile(bucketName, folderName, upload);
+        userdto.setProfile(profile);//업로드된 UUID 파일명을 dto 에 저장
+
+        //db 에 저장
         userService.updateUser(userdto);
-        return "movie/movielist";
+
+        return "redirect:../movie/list";
     }
 
     @GetMapping("/user/updateform")
