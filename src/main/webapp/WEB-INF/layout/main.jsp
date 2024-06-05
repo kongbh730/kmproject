@@ -30,12 +30,12 @@
 </head>
 <body>
 <div class="main-body">
-    <div class="main-container"> 
+    <div class="main-container">
         <%-- <c:forEach var="moviedto" items="${list}">
             환영합니다
         </c:forEach> --%>
         <a href="../movie/list">
-        	<img src="../image/MKCINEMALOGO.jpg" height="100%">
+        	<img src="../image/img.png" height="100%">
         </a>
     </div>
 </div>

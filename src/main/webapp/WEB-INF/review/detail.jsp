@@ -167,14 +167,14 @@
 </style>
     <script>
         $(document).ready(function() {
-            var genreString = "${moviedto.genre}";
+            let genreString = "${moviedto.genre}";
 
-            var genres = genreString.split(',');
+            let genres = genreString.split(',');
 
-            var container = $('#genre-buttons-container');
+            let container = $('#genre-buttons-container');
 
             genres.forEach(function(genre) {
-                var button = $('<button></button>')
+                let button = $('<button></button>')
                     .text(genre.trim())
                     .addClass('btn btn-outline-secondary');
                 container.append(button);
