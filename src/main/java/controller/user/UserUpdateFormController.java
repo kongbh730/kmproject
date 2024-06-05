@@ -1,11 +1,12 @@
 package controller.user;
 
-import com.amazonaws.services.ec2.model.UserData;
+import data.dto.MovieDto;
 import data.dto.UserDto;
 import data.service.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import naver.cloud.NcpObjectStorageService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,62 +31,63 @@ public class UserUpdateFormController {
     @Autowired
     private NcpObjectStorageService storageService;
 
-    @ResponseBody
-    @PostMapping("/upload")
-    public Map<String, String> uploadPhoto(
-            @RequestParam("upload") MultipartFile upload,
-            @RequestParam String email,
-            HttpServletRequest request
+//    @ResponseBody
+//    @PostMapping("/upload")
+//    public Map<String, String> uploadPhoto(
+//            @RequestParam("upload") MultipartFile upload,
+//            @RequestParam String email,
+//            HttpServletRequest request
+//    )
+//    {
+//        String profile=storageService.uploadFile(bucketName, folderName, upload);
+//
+//        userService.updatePhoto(email,profile);
+//
+//        Map<String, String> map = new HashMap<>();
+//        map.put("photoname",profile);
+//
+//        return map;
+//    }
+
+    //update
+    @GetMapping("/user/detail")
+    public String movieUpdateForm(
+            Model model,
+            HttpSession session
     )
     {
-//        String savePath = request.getSession().getServletContext().getRealPath("/save");
-//
-//        //업로드한 파일의 확장자 분리
-//        String ext=upload.getOriginalFilename().split("\\.")[1];
-//        //업로드할 파일명
-//        String photo= UUID.randomUUID()+"."+ext;
-//
-//        //실제 업로드
-//        try {
-//            upload.transferTo(new File(savePath+"/",photo));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        String email=(String)session.getAttribute("loginid");
 
-        //스토리지에 업로드하기
-        String profile=storageService.uploadFile(bucketName, folderName, upload);
-
-        userService.updatePhoto(email,profile);
-        //db에서 photo 수정
-
-        Map<String, String> map = new HashMap<>();
-        map.put("photoname",profile);
-
-        return map;
-    }
-
-    @GetMapping("/user/detail")
-    public String detail(@RequestParam String email, Model model)
-    {
-        UserDto userdto=userService.getUserById(email);
+        UserDto userdto = userService.getUserById(email);
         model.addAttribute("userdto", userdto);
+
         return "user/userdetail";
     }
 
     @PostMapping("/user/update")
-    public String update(@ModelAttribute UserDto userdto)
+    public String updateMovie(
+            @ModelAttribute UserDto userdto,
+            @RequestParam("upload") MultipartFile upload,
+            HttpServletRequest request
+    )
     {
+        System.out.println(upload);
+        if(!upload.isEmpty())//새 이미지 파일 업로드된 경우
+        {
+            String uploadprofile = storageService.uploadFile(bucketName, folderName, upload);
+            userdto.setProfile(uploadprofile);
+            System.out.println(uploadprofile);
+        }
+        else//이미지 파일이 업로드 안된 경우, 기존 이미지 사용
+        {
+            String existprofile = userService.getUserById(userdto.getEmail()).getProfile();
+            userdto.setProfile(existprofile);
+        }
         userService.updateUser(userdto);
-        return "movie/movielist";
+
+        return "redirect:../movie/list";
     }
 
-    @GetMapping("/user/updateform")
-    public String updateForm(@RequestParam String email, Model model)
-    {
-        UserDto userdto =userService.getUserById(email);
-        model.addAttribute("userdto", userdto);
-        return "user/userupdate";
-    }
 
     @GetMapping("/user/delete")
     public Map<String, String> delete(@RequestParam String email,@RequestParam String passwd)
