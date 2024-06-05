@@ -30,7 +30,7 @@
 </head>
 <body>
 <div class="main-body">
-    <div class="main-container">
+    <div class="main-container"> 
         <%-- <c:forEach var="moviedto" items="${list}">
             환영합니다
         </c:forEach> --%>
