@@ -39,14 +39,6 @@ public class UserService {
 
 	}
 
-	public void updatePhoto(String email,String profile)
-	{
-		Map<String, String> map=new HashMap<>();
-		map.put("email",email);
-		map.put("profile",profile);
-		userInter.updatePhoto(map);
-	}
-
 	public boolean isLoginCheck(String email,String passwd)
 	{
 		return userInter.isLoginCheck(email,passwd)==1?true:false;

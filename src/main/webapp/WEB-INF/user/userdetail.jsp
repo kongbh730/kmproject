@@ -182,7 +182,7 @@
                      onerror="this.src='../image/noimage2.png'">
             </h1>
             <form action="./update" method="post" enctype="multipart/form-data">
-<%--                <input type="hidden" name="profile" value="${stpath}/${userdto.profile}">--%>
+<%--                <input type="hidden" name="email" value="${userdto.email}">--%>
                 <input type="file" name="upload" id="upload" class="form-control">
                 <input type="text" name="email" placeholder="email" value="${userdto.email}">
                 <input type="password" name="passwd" placeholder="password" value="${userdto.passwd}">
