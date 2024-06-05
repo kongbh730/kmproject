@@ -108,9 +108,18 @@
     </script>
 <body>
     <div class="main-body">
+   	 	<!-- <div class="mainphoto">
+			<marquee direction="left" behavior="alternate">
+				<img src="../image/범죄도시.jpg" width="200px" height="200px">
+				<img src="../image/쇼생크 탈출.jpg" width="200px" height="200px">
+				<img src="../image/아바타.jpg" width="200px" height="200px">
+				<img src="../image/타이타닉.jpg" width="200px" height="200px">
+			</marquee>
+		</div> -->
+		
         <div class="main-container">
             <div class="randomposter" style="color: white">
-                <img src=""
+                <!-- <img src=""/> -->
             </div>
             <div class="login">
                 <h1>

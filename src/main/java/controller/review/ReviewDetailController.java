@@ -73,6 +73,7 @@ public class ReviewDetailController {
 		return "redirect:../review/detail?movienum=" + movienum;
 	}
 	
+	//해당 movienum 영화의 리뷰만 가져오기
 	@GetMapping("/movie/detail")
     public String getMovieDetail(@RequestParam("movienum") int movienum, Model model) {
         List<ReviewDto> reviews = reviewService.getReviewsByMovieNum(movienum);
