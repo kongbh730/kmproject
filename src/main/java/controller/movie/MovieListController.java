@@ -25,6 +25,6 @@ public class MovieListController {
 
         model.addAttribute("list", list);
 
-        return "movie/movielist";
+        return "movie/movielist";//주석만 추가해봄
     }
 }
